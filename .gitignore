@@ -1,11 +1,15 @@
 # Ignore all
 *
-# ignore all a.out files...
-*/a.out
+
 # Unignore all with extensions
 !*.*
 
 # Unignore all dirs
 !*/
+
+# ignore all a.out files...
+*/a.out
+a.out
+*.out
 
 .DS_Store
