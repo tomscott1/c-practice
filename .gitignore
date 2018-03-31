@@ -1,6 +1,7 @@
 # Ignore all
 *
-
+# ignore all a.out files...
+*/a.out
 # Unignore all with extensions
 !*.*
 
