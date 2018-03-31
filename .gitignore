@@ -12,4 +12,8 @@
 a.out
 *.out
 
+# ignore any .swp files
+*/*.swp
+*.swp
+
 .DS_Store
