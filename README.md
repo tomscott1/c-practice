@@ -7,3 +7,5 @@
 - [ ] Attempt own implementation of Hash Table
 
 - [ ] Complete https://github.com/jamesroutley/write-a-hash-table
+
+- [ ] Do /r/dailyprogrammer exercises
