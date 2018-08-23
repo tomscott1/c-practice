@@ -9,3 +9,9 @@
 - [ ] Complete https://github.com/jamesroutley/write-a-hash-table
 
 - [ ] Do /r/dailyprogrammer exercises
+
+Create programs which solve mathematical problems
+
+- [ ] Factorial !x
+
+- 
