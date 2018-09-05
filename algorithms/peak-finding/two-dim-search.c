@@ -13,15 +13,35 @@ void print2d(int ** array, int rows, int cols) {
   }
 }
 
-int * get_one_dim(int ** two_dim_array, int pos, int is_col, int num_rows_or_cols) {
+int getMiddle(int start, int length) {
+  int middle, num_cols;
+  num_cols = length - start;
+  if (num_cols % 2 == 1) middle = num_cols / 2
+  if (num_cols % 2 == 0) middle = (num_cols / 2) - 1
+  return start + middle;
+}
+
+int findGlobalMaxPosition(int column[], int length) {
+  int i, position, maximum;
+  maximum = column[0];
+  position = 0;
+  for (i=1; i<length; i++) {
+    if (column[i] > maximum){
+      maximum = column[i];
+      position = i;
+    }
+  }
+  printf("Maximum element is present at location %d and it's value is %d.\n", position, maximum);
+  return position;
+}
+
+int * getOneDim(int ** two_dim_array, int pos, int is_col, int num_rows_or_cols) {
   /* this functions pulls a one dimensional array out of a two dimensional
   ** array given a row or columns
   */
-
   int* r;
-  r = malloc(num_rows_or_cols*sizeof(int));
-
   int i, j;
+  r = malloc(num_rows_or_cols*sizeof(int));
 
   for (i=0; i<num_rows_or_cols; i++) {
     if (is_col) r[i] = two_dim_array[i][pos];
@@ -34,7 +54,7 @@ int * get_one_dim(int ** two_dim_array, int pos, int is_col, int num_rows_or_col
 int main() {
   int *new_one_dim, **two_dim_array;
   int num_rows = 5, num_cols = 6;
-  int x, i, j, position;
+  int x, i, j, middle, max_position;
 
   srand(time(NULL));
 
@@ -57,12 +77,19 @@ int main() {
   print2d(two_dim_array, num_rows, num_cols);
 
   // get the array in column m/2
-  position = (num_cols / 2) - 1;
-  new_one_dim = get_one_dim(two_dim_array, position, 1, num_cols);
+  middle = getMiddle(0, num_cols)
 
-  // TODO: perform a binary search on this array
+  new_one_dim = getOneDim(two_dim_array, middle, 1, num_rows);
 
-  for (i=0; i<num_rows; i++) {
+  // find global max
+  max_position = findGlobalMaxPosition(new_one_dim, num_cols);
+
+  // compare global max (i,j) to (i, j-1) and (i, j+1)
+  if (two_dim_array[max_position][middle] > two_dim_array[max_position][middle-1]) {
+    middle = getMiddle(0, middle-1)
+  }
+
+  for (i=0; i<num_cols; i++) {
     printf("%d\n", *(new_one_dim + i));
   }
 
@@ -71,4 +98,5 @@ int main() {
     free(two_dim_array[x]);
   }
   free(two_dim_array);
+  free(new_one_dim);
 }
